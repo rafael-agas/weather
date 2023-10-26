@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    background-color: #d7d7d7;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer {
+    text-align: center;
+}
