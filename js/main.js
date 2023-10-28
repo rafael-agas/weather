@@ -32,7 +32,7 @@ async function getWeather (coordinates) {
 // Calls a function to create the weather cards
 function weatherCard (dataseries) {
    for (let i = 0; i < dataseries.length; i++) {
-      var card = createCard(dataseries[i]);
+      var card = createCard(dataseries[i], i);
       document.getElementById("weatherCard").appendChild(card);
    }
 }

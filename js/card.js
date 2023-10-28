@@ -1,19 +1,22 @@
 // Card component HTML
-const cardComponent = `
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img" alt="..." id="weatherPic">
+function component (i) {
+  return `
+  <img src="..." class="card-img" alt="..." id="weatherPic${i}">
   <div class="card-body">
-    <h5 class="card-title" id="currentDate"></h5>
-    <p class="card-text" id="weather"></p>
-    <p class="card-text" id="lowTemp"></p>
-    <p class="card-text" id="highTemp"></p>
+    <h5 class="card-title" id="currentDate${i}"></h5>
+    <p class="card-text" id="weather${i}"></p>
+    <p class="card-text" id="lowTemp${i}"></p>
+    <p class="card-text" id="highTemp${i}"></p>
   </div>
-</div>
-`
+   `
+}
 // creates a weather card
-export function createCard(dataseries) {
+export function createCard(dataseries, i) {
    const container = document.createElement('div');
-   container.innerHTML = cardComponent;
+   container.setAttribute("class", "card");
+   container.setAttribute("style", "width: 10rem")
+   container.setAttribute("id", "card" + i);
+   container.innerHTML = component(i);
    return container;
 }
 
