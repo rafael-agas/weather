@@ -5,7 +5,7 @@ function component (dataseries, i) {
    const weatherPic = weatherImage(dataseries.weather, dataseries.wind10m_max);
    return `
       <img src="${weatherPic}" class="card-img" alt="..." id="weatherPic${i}">
-      <div class="card-body">
+      <div class="card-body text-center">
       <h5 class="card-title" id="currentDate${i}">${dataseries.date}</h5>
       <p class="card-text" id="weather${i}">${dataseries.weather}</p>
       <p class="card-text" id="lowTemp${i}">${low}</p>
@@ -34,7 +34,7 @@ export function weatherCard (dataseries) {
 // creates a weather card
 export function createCard(dataseries, i) {
    const container = document.createElement('div');
-   container.setAttribute("class", "card");
+   container.setAttribute("class", "card p-1 m-1 shadow-lg bg-body rounded cardBg");
    container.setAttribute("style", "width: 10rem")
    container.setAttribute("id", "card" + i);
    container.innerHTML = component(dataseries, i);
@@ -42,7 +42,7 @@ export function createCard(dataseries, i) {
 }
 
 function updateCard(dataseries, i) {
-   console.log(dataseries);
+   //console.log(dataseries);
    document.getElementById("currentDate"+ i).innerText = dataseries.date;
    document.getElementById("weather"+ i).innerText = dataseries.weather;
    const lowtemp = dataseries.temp2m.min;
@@ -54,8 +54,8 @@ function updateCard(dataseries, i) {
 }
 
 function weatherImage(weather, wind10m_max) {
-   console.log(weather);
-   console.log(wind10m_max);
+   //console.log(weather);
+   //console.log(wind10m_max);
    if (wind10m_max >= 6) {
       return "/images/windy.png";
    } else if (weather === "pcloudy") {
@@ -89,4 +89,8 @@ function weatherImage(weather, wind10m_max) {
    } else {
       return "images/tstorm.png";
    }
+}
+
+export function tempChange (temp, type) {
+   console.log(temp + " " + type);
 }

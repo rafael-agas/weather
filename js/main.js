@@ -188,7 +188,7 @@ function populateCities () {
  // Function to get weather data (used in your application)
  async function getWeather(coordinates, useMockData = true) {
    const response = await fetchWeatherData(coordinates, useMockData);
-   // uses mock data 
+   // use mock data 
    if (useMockData) {
       weatherCard(response.dataseries[0].dataseries);
    } else {

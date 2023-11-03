@@ -11,9 +11,19 @@ body {
 #weatherCard {
     display: flex;
     flex-direction: row;
+    padding: 10px;
 }
 
 footer {
     text-align: center;
     
 }
+
+option  {
+    text-align: center;
+}
+
+select {
+    text-align: center;
+}
+
