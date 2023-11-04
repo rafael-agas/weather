@@ -1,14 +1,15 @@
-import { createCard, weatherCard } from "./card.js";
+import { weatherCard, tempChange } from "./card.js";
 
 // Grabs the coordinates from the selected option
 function weatherCities () {
-   var dropdown = document.getElementById("cities");
-   var weatherCard = document.getElementById("weatherCard");
+   let dropdown = document.getElementById("cities");
+   let weatherCard = document.getElementById("weatherCard");
 
    dropdown.addEventListener("change", function () {
       var chosen = dropdown.options[dropdown.selectedIndex];
       var coordinates = chosen.value.split(',');
-      //console.log(coordinates[0] + "," + coordinates[1]);
+      console.log(coordinates[0] + "," + coordinates[1]);
+      dropdown.options[0].disabled = true;
       getWeather(coordinates);
    });
 }
@@ -25,7 +26,7 @@ async function fetchWeatherData(coordinates, useMockData = false) {
             "dataseries": [
                 {
                     "date": 20231103,
-                    "weather": "lightrain",
+                    "weather": "humid",
                     "temp2m": {
                         "max": 27,
                         "min": 27
@@ -43,7 +44,7 @@ async function fetchWeatherData(coordinates, useMockData = false) {
                 },
                 {
                     "date": 20231104,
-                    "weather": "cloudy",
+                    "weather": "oshower",
                     "temp2m": {
                         "max": 28,
                         "min": 28
@@ -52,7 +53,7 @@ async function fetchWeatherData(coordinates, useMockData = false) {
                 },
                 {
                     "date": 20231105,
-                    "weather": "cloudy",
+                    "weather": "tstorm",
                     "temp2m": {
                         "max": 28,
                         "min": 28
@@ -79,7 +80,7 @@ async function fetchWeatherData(coordinates, useMockData = false) {
                 },
                 {
                     "date": 20231108,
-                    "weather": "ishower",
+                    "weather": "fog",
                     "temp2m": {
                         "max": 28,
                         "min": 27
@@ -94,8 +95,8 @@ async function fetchWeatherData(coordinates, useMockData = false) {
    } else {
      // making API call
      const params = {
-       "lon": coordinates[1],
-       "lat": coordinates[0],
+       "lon": coordinates[1].trim(),
+       "lat": coordinates[0].trim(),
        "product": "civillight",
        "output": "json",
      };
@@ -108,7 +109,7 @@ async function fetchWeatherData(coordinates, useMockData = false) {
  // Populates the dropdown menu
 function populateCities () {
    // Loads the lat and long of each cities
-   var csvData = `latitude,longitude,city,country
+   let csvData = `latitude,longitude,city,country
    52.367,4.904,Amsterdam,Netherlands
    39.933,32.859,Ankara,Turkey
    56.134,12.945,Åstorp,Sweden
@@ -157,7 +158,7 @@ function populateCities () {
    41.902,12.496,Rome,Italy
    39.453,-31.127,Santa Cruz das Flores,Portugual
    28.463,-16.251,Santa Cruz de Tenerife,Spain
-   47.595,122.333,Seattle,USA
+   47.606,122.333,Seattle,USA
    57.273,-6.215,Skye,Scotland
    42.697,23.321,Sofia,Bulgaria
    59.329,18.068,Stockholm,Sweden
@@ -174,10 +175,10 @@ function populateCities () {
    var dropdown = document.getElementById("cities");
    
    //populates the options menu
-   for (var i = 1; i < rows.length; i++) {
-      var cols = rows[i].split(',');
+   for (let i = 1; i < rows.length; i++) {
+      let cols = rows[i].split(',');
 
-      var option = document.createElement('option');
+      let option = document.createElement('option');
       option.value = cols[0] + "," + cols[1];
       option.text = cols[2] + "," + cols[3];
 
@@ -186,13 +187,18 @@ function populateCities () {
 }
 
  // Function to get weather data (used in your application)
- async function getWeather(coordinates, useMockData = true) {
+ async function getWeather(coordinates, useMockData = false) {
+   const tempButton = document.getElementById("tempContainer");
+   tempButton.classList.remove("d-none");
+   document.getElementById("tempSwitch").checked = false;
+   tempChange();
    const response = await fetchWeatherData(coordinates, useMockData);
    // use mock data 
    if (useMockData) {
       weatherCard(response.dataseries[0].dataseries);
    } else {
-      // uses api data
+      // uses api data'
+      console.log(response.dataseries); 
       weatherCard(response.dataseries);
    }
  }

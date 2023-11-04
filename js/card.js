@@ -1,15 +1,15 @@
 // Card component HTML
 function component (dataseries, i) {
-   const low = dataseries.temp2m.min;
-   const high = dataseries.temp2m.max;
+   const low = dataseries.temp2m.min
+   const high = dataseries.temp2m.max
    const weatherPic = weatherImage(dataseries.weather, dataseries.wind10m_max);
    return `
       <img src="${weatherPic}" class="card-img" alt="..." id="weatherPic${i}">
       <div class="card-body text-center">
       <h5 class="card-title" id="currentDate${i}">${dataseries.date}</h5>
       <p class="card-text" id="weather${i}">${dataseries.weather}</p>
-      <p class="card-text" id="lowTemp${i}">${low}</p>
-      <p class="card-text" id="highTemp${i}">${high}</p>
+      <p class="card-text" id="lowTemp${i}">${low}°C Low</p>
+      <p class="card-text" id="highTemp${i}">${high}°C High</p>
       </div>
    `;
 }
@@ -45,10 +45,8 @@ function updateCard(dataseries, i) {
    //console.log(dataseries);
    document.getElementById("currentDate"+ i).innerText = dataseries.date;
    document.getElementById("weather"+ i).innerText = dataseries.weather;
-   const lowtemp = dataseries.temp2m.min;
-   const hightemp = dataseries.temp2m.max;
-   document.getElementById("lowTemp"+ i).innerText = lowtemp;
-   document.getElementById("highTemp"+ i).innterText = hightemp;
+   document.getElementById("lowTemp"+ i).innerText = dataseries.temp2m.min+"°C Low";
+   document.getElementById("highTemp"+ i).innerText = dataseries.temp2m.max+"°C High";
    const weather = weatherImage(dataseries.weather, dataseries.wind10m_max);
    document.getElementById("weatherPic" + i).setAttribute("src", weather);
 }
@@ -91,6 +89,30 @@ function weatherImage(weather, wind10m_max) {
    }
 }
 
-export function tempChange (temp, type) {
-   console.log(temp + " " + type);
+export function tempChange () {
+   const tempButton = document.getElementById("tempSwitch");
+   tempButton.addEventListener("change", function () {
+      //console.log(tempButton.checked);
+      if (tempButton.checked) {
+         for (let i = 0; i <= 6; i++) {
+            let lowTemp = document.getElementById("lowTemp"+i);
+            let highTemp = document.getElementById("highTemp"+i);
+            let newLow = Math.round((parseInt(lowTemp.innerText)  * (9/5)) + 32);
+            lowTemp.innerText = newLow + "°F Low";
+            let newHigh = Math.round((parseInt(highTemp.innerText)  * (9/5)) + 32);
+            highTemp.innerText = newHigh + "°F High";
+            //console.log(parseInt(lowTemp.innerText) + "°F");
+         }
+      } else {
+         for (let i = 0; i <= 6; i++) {
+            let lowTemp = document.getElementById("lowTemp"+i);
+            let highTemp = document.getElementById("highTemp"+i);
+            //console.log(parseInt(lowTemp.innerText) + "°C");
+            let newLow = Math.round((parseInt(lowTemp.innerText) - 32)  * (5/9));
+            lowTemp.innerText = newLow + "°C Low";
+            let newHigh = Math.round((parseInt(highTemp.innerText) - 32)  * (5/9));
+            highTemp.innerText = newHigh + "°C High";
+         }
+      }
+   })
 }

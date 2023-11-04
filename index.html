@@ -22,13 +22,10 @@
     <select id = "cities" name = "cities" title="Drop down and choose a city to see the forecast">
         <option value="" disbabled selected>-- Choose a City --</option>
     </select>
-    <div>
+    <div class = "d-none" id = "tempContainer">
         <label class="switch m-2 p-2">
             <input type="checkbox" id="tempSwitch">
-            <span class="slider round">
-                <span class = "visually-hidden">C</span>
-                <span class = "visually-hidden">F</span>
-            </span>
+            <span class="slider"></span>
         </label>
     </div>
     <div id = "weatherCard" class = "container"></div>
