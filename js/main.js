@@ -8,7 +8,7 @@ function weatherCities () {
    dropdown.addEventListener("change", function () {
       var chosen = dropdown.options[dropdown.selectedIndex];
       var coordinates = chosen.value.split(',');
-      console.log(coordinates[0] + "," + coordinates[1]);
+      //console.log(coordinates[0] + "," + coordinates[1]);
       dropdown.options[0].disabled = true;
       getWeather(coordinates);
    });
@@ -158,7 +158,7 @@ function populateCities () {
    41.902,12.496,Rome,Italy
    39.453,-31.127,Santa Cruz das Flores,Portugual
    28.463,-16.251,Santa Cruz de Tenerife,Spain
-   47.606,122.333,Seattle,USA
+   47.565,122.333,Seattle,USA
    57.273,-6.215,Skye,Scotland
    42.697,23.321,Sofia,Bulgaria
    59.329,18.068,Stockholm,Sweden
@@ -191,16 +191,16 @@ function populateCities () {
    const tempButton = document.getElementById("tempContainer");
    tempButton.classList.remove("d-none");
    document.getElementById("tempSwitch").checked = false;
-   tempChange();
    const response = await fetchWeatherData(coordinates, useMockData);
    // use mock data 
    if (useMockData) {
       weatherCard(response.dataseries[0].dataseries);
    } else {
       // uses api data'
-      console.log(response.dataseries); 
+      //console.log(response.dataseries); 
       weatherCard(response.dataseries);
    }
+   tempChange();
  }
 
 window.onload = function () {

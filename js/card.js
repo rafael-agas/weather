@@ -17,7 +17,7 @@ function component (dataseries, i) {
 
 // Calls a function to create the weather cards
 export function weatherCard (dataseries) {
-   //console.log(dataseries);
+   //console.log(dataseries.length);
    const cards = document.getElementById("weather0");
    if (cards) {
       for (let i = 0; i < dataseries.length; i++) {
@@ -91,28 +91,28 @@ function weatherImage(weather, wind10m_max) {
 
 export function tempChange () {
    const tempButton = document.getElementById("tempSwitch");
+   const originalTemps = [];
+   for(let i = 0; i < 7; i++) {
+      let lowTemp = document.getElementById("lowTemp" + i);
+      let highTemp = document.getElementById("highTemp"+ i);
+      originalTemps.push({low: parseInt(lowTemp.innerText), high: parseInt(highTemp.innerText)});
+   }
+   //console.log(originalTemps);
    tempButton.addEventListener("change", function () {
-      //console.log(tempButton.checked);
-      if (tempButton.checked) {
-         for (let i = 0; i <= 6; i++) {
-            let lowTemp = document.getElementById("lowTemp"+i);
-            let highTemp = document.getElementById("highTemp"+i);
-            let newLow = Math.round((parseInt(lowTemp.innerText)  * (9/5)) + 32);
+      for (let i = 0; i < 7; i++) {
+         let lowTemp = document.getElementById("lowTemp" + i);
+         let highTemp = document.getElementById("highTemp" + i);
+
+         if (tempButton.checked) {
+            let newLow = Math.round((originalTemps[i].low * (9 / 5)) + 32);
             lowTemp.innerText = newLow + "°F Low";
-            let newHigh = Math.round((parseInt(highTemp.innerText)  * (9/5)) + 32);
+
+            let newHigh = Math.round((originalTemps[i].high * (9 / 5)) + 32);
             highTemp.innerText = newHigh + "°F High";
-            //console.log(parseInt(lowTemp.innerText) + "°F");
-         }
-      } else {
-         for (let i = 0; i <= 6; i++) {
-            let lowTemp = document.getElementById("lowTemp"+i);
-            let highTemp = document.getElementById("highTemp"+i);
-            //console.log(parseInt(lowTemp.innerText) + "°C");
-            let newLow = Math.round((parseInt(lowTemp.innerText) - 32)  * (5/9));
-            lowTemp.innerText = newLow + "°C Low";
-            let newHigh = Math.round((parseInt(highTemp.innerText) - 32)  * (5/9));
-            highTemp.innerText = newHigh + "°C High";
+         } else {
+            lowTemp.innerText = originalTemps[i].low + "°C High" ;
+            highTemp.innerText = originalTemps[i].high + "°C High" ;
          }
       }
-   })
+   });
 }
