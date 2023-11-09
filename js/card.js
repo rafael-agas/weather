@@ -41,6 +41,7 @@ export function createCard(dataseries, i) {
    return container;
 }
 
+// updates the weather cards with new information
 function updateCard(dataseries, i) {
    //console.log(dataseries);
    document.getElementById("currentDate"+ i).innerText = dataseries.date;
@@ -51,44 +52,37 @@ function updateCard(dataseries, i) {
    document.getElementById("weatherPic" + i).setAttribute("src", weather);
 }
 
+// returns the image path for the weather type
 function weatherImage(weather, wind10m_max) {
    //console.log(weather);
    //console.log(wind10m_max);
-   if (wind10m_max >= 6) {
-      return "/images/windy.png";
-   } else if (weather === "pcloudy") {
-      return "images/pcloudy.png";
-   } else if (weather === "mcloudy") {
-      return "images/mcloudy.png";
-   } else if (weather === "cloudy") {
-      return "images/cloudy.png";
-   } else if (weather === "humid") {
-      return "images/humid.png";
-   } else if (weather === "lightrain") {
-      return "images/lightrain.png";
-   } else if (weather === "oshower") {
-      return "images/oshower.png";
-   } else if (weather === "ishower") {
-      return "images/ishower.png";
-   } else if (weather === "lightsnow") {
-      return "images/lightsnow.png";
-   } else if (weather === "rain") {
-      return "images/rain.png";
-   } else if (weather === "snow") {
-      return "images/snow.png";
-   } else if (weather === "rainsnow") {
-      return "images/rainsnow.png";
-   } else if (weather === "clear"){
-      return "images/clear.png";
-   } else if (weather === "tsrain") {
-      return "images/tsrain.png";
-   } else if (weather === "fog") {
-      return "images/fog.png";
-   } else {
-      return "images/tstorm.png";
-   }
+   const weatherImages = {
+      "pcloudy": "images/pcloudy.png",
+      "mcloudy": "images/mcloudy.png",
+      "cloudy": "images/cloudy.png",
+      "humid": "images/humid.png",
+      "lightrain": "images/lightrain.png",
+      "oshower": "images/oshower.png",
+      "ishower": "images/ishower.png",
+      "lightsnow": "images/lightsnow.png",
+      "rain": "images/rain.png",
+      "snow": "images/snow.png",
+      "rainsnow": "images/rainsnow.png",
+      "clear": "images/clear.png",
+      "tsrain": "images/tsrain.png",
+      "fog": "images/fog.png",
+      "tstorm": "images/tstorm.png",
+      "windy": "images/windy.png"
+  };
+  if (wind10m_max >= 6) {
+   return weatherImages["windy"];
+  }
+
+  return weatherImages[weather];
+
 }
 
+// Changes the temperature between Celsius and Fahrenheit
 export function tempChange () {
    const tempButton = document.getElementById("tempSwitch");
    const originalTemps = [];
