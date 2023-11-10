@@ -26,3 +26,48 @@ option  {
 select {
     text-align: center;
 }
+
+
+@media screen and (min-width: 1400px), screen and (orientation: portrait){
+    #weatherCard >  div > .card-body > h5{
+       font-size: 1.5rem;
+    }
+ }
+
+
+@media screen and (max-width: 1200px), screen and (orientation: portrait){
+    #weatherCard >  div > .card-body > h5{
+        font-size: 1.5em;
+    }
+
+    #weatherCard {
+       flex-direction: column;
+       width: 35%;
+       font-size: 1.5em;
+    }
+
+    #weatherCard > div > .card-img {
+        width: 75%;
+        display: block;
+        margin: auto;
+    }
+ }
+ 
+ @media screen and (max-width: 600px), screen and (orientation: portrait){
+    
+    #weatherCard >  div > .card-body > h5{
+        font-size: 1.5em;
+    }
+
+    #weatherCard {
+       flex-direction: column;
+       width: 75%;
+       font-size: 1.5rem;
+    }
+
+    #weatherCard > div > .card-img {
+        width: 75%;
+        display: block;
+        margin: auto;
+    }
+ }

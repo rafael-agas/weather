@@ -24,9 +24,10 @@
  
  .slider:before {
    position: absolute;
+   font-size: 1.5em;
    height: 26px;
    content: "\02103";
-   line-height: 15px;
+   line-height: 22px;
    width: 26px;
    left: 4px;
    bottom: 4px;
@@ -49,6 +50,6 @@
    -ms-transform: translateX(26px);
    transform: translateX(26px);
    content: "\02109";
-   line-height: 15px;
+   line-height: 22px;
  }
 

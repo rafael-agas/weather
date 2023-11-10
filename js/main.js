@@ -16,7 +16,7 @@ function weatherCities () {
 
 // Makes the API call for the weather data for the selected city.
 // Function to fetch weather data (with an optional mock parameter)
-async function fetchWeatherData(coordinates, useMockData = false) {
+async function fetchWeatherData(coordinates, useMockData = true) {
    if (useMockData) {
      const mockData = {
       dataseries: [
@@ -138,7 +138,7 @@ async function fetchWeatherData(coordinates, useMockData = false) {
    if (useMockData) {
       weatherCard(response.dataseries[0].dataseries);
    } else {
-      // uses api data'
+      // uses api data
       //console.log(response.dataseries); 
       weatherCard(response.dataseries);
    }

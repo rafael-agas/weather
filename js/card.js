@@ -34,8 +34,8 @@ export function weatherCard (dataseries) {
 // creates a weather card
 export function createCard(dataseries, i) {
    const container = document.createElement('div');
-   container.setAttribute("class", "card p-1 m-1 shadow-lg bg-body rounded cardBg");
-   container.setAttribute("style", "width: 10rem")
+   container.setAttribute("class", "card p-1 m-1 shadow-lg bg-body rounded cardBg ");
+   container.setAttribute("style", "width: 100%");
    container.setAttribute("id", "card" + i);
    container.innerHTML = component(dataseries, i);
    return container;
