@@ -129,26 +129,37 @@ async function fetchWeatherData(coordinates, useMockData = true) {
  }
 
  // Function to get weather data
- async function getWeather(coordinates, useMockData = true) {
-   const tempButton = document.getElementById("tempContainer");
-   tempButton.classList.remove("d-none");
-   document.getElementById("tempSwitch").checked = false;
-   const response = await fetchWeatherData(coordinates, useMockData);
-   // use mock data 
-   if (useMockData) {
-      weatherCard(response.dataseries[0].dataseries);
-   } else {
-      // uses api data
-      //console.log(response.dataseries); 
-      weatherCard(response.dataseries);
-   }
-   tempChange();
- }
+ async function getWeather(coordinates, useMockData = false) {
+    const tempButton = document.getElementById("tempContainer");
+    tempButton.classList.remove("d-none");
+    document.getElementById("tempSwitch").checked = false;
+    showLoading();
+    try {
+        const response = await fetchWeatherData(coordinates, useMockData);
+        // Use mock data or API data
+        if (useMockData) {
+            weatherCard(response.dataseries[0].dataseries);
+        } else {
+            weatherCard(response.dataseries);
+        }
+        tempChange();
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    } finally {
+        hideLoading();
+    }
+}
 
-/*  window.addEventListener('load', function() {
-    this.document.getElementById('loading').style.display = 'none';
-    this.document.getElementById('weatherCard').style.display = 'visible';
- }) */
+ function showLoading() {
+    document.getElementById('loader').classList.remove("d-none");
+    document.getElementById('weatherCard').style.display = 'none';
+}
+
+// Function to hide loading animation
+function hideLoading() {
+    document.getElementById('loader').classList.add("d-none");
+    document.getElementById('weatherCard').style.display = 'flex';
+}
 
 window.onload = function () {
    populateCities();
