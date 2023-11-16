@@ -108,7 +108,7 @@ async function fetchWeatherData(coordinates, useMockData = true) {
  
  // Populates the dropdown menu
  async function populateCities() {
-    // Fetch CSV file asynchronously
+    // Fetch CSV file
     fetch('city_coordinates.csv')
        .then(response => response.text())
        .then(csvData => {
@@ -129,7 +129,7 @@ async function fetchWeatherData(coordinates, useMockData = true) {
  }
 
  // Function to get weather data
- async function getWeather(coordinates, useMockData = false) {
+ async function getWeather(coordinates, useMockData = true) {
    const tempButton = document.getElementById("tempContainer");
    tempButton.classList.remove("d-none");
    document.getElementById("tempSwitch").checked = false;
@@ -144,6 +144,11 @@ async function fetchWeatherData(coordinates, useMockData = true) {
    }
    tempChange();
  }
+
+/*  window.addEventListener('load', function() {
+    this.document.getElementById('loading').style.display = 'none';
+    this.document.getElementById('weatherCard').style.display = 'visible';
+ }) */
 
 window.onload = function () {
    populateCities();

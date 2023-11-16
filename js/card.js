@@ -1,12 +1,13 @@
 // Card component HTML
 function component (dataseries, i) {
-   const low = dataseries.temp2m.min
-   const high = dataseries.temp2m.max
+   const low = dataseries.temp2m.min;
+   const high = dataseries.temp2m.max;
+   const date = convertDate(dataseries.date);
    const weatherPic = weatherImage(dataseries.weather, dataseries.wind10m_max);
    return `
       <img src="${weatherPic}" class="card-img" alt="..." id="weatherPic${i}">
       <div class="card-body text-center">
-      <h5 class="card-title" id="currentDate${i}">${dataseries.date}</h5>
+      <h5 class="card-title" id="currentDate${i}">${date}</h5>
       <p class="card-text" id="weather${i}">${dataseries.weather}</p>
       <p class="card-text" id="lowTemp${i}">${low}°C Low</p>
       <p class="card-text" id="highTemp${i}">${high}°C High</p>
@@ -34,17 +35,18 @@ export function weatherCard (dataseries) {
 // creates a weather card
 export function createCard(dataseries, i) {
    const container = document.createElement('div');
-   container.setAttribute("class", "card p-1 m-1 shadow-lg bg-body rounded cardBg ");
+   container.setAttribute("class", "card p-1 m-1 shadow-lg bg-body rounded cardBg");
    container.setAttribute("style", "width: 100%");
    container.setAttribute("id", "card" + i);
    container.innerHTML = component(dataseries, i);
+   container.classList.add("col-sm-12", "col-xl", "col-md-4", "col-lg");
    return container;
 }
 
 // updates the weather cards with new information
 function updateCard(dataseries, i) {
-   //console.log(dataseries);
-   document.getElementById("currentDate"+ i).innerText = dataseries.date;
+   //console.log(typeof dataseries.date);
+   document.getElementById("currentDate"+ i).innerText = convertDate(dataseries.date);
    document.getElementById("weather"+ i).innerText = dataseries.weather;
    document.getElementById("lowTemp"+ i).innerText = dataseries.temp2m.min+"°C Low";
    document.getElementById("highTemp"+ i).innerText = dataseries.temp2m.max+"°C High";
@@ -109,4 +111,17 @@ export function tempChange () {
          }
       }
    });
+}
+
+function convertDate(dateInput) {
+   const dateString = dateInput.toString();
+
+   // Parse the input string into a Date object
+   const date = new Date(`${dateString.substr(0, 4)}-${dateString.substr(4, 2)}-${dateString.substr(6, 2)}`);
+
+   // Get the day and date in a readable format
+   const options = { weekday: 'short', month: 'short', day: 'numeric' };
+   const formattedDate = date.toLocaleDateString('en-US', options);
+
+   return formattedDate;
 }

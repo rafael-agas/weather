@@ -37,19 +37,16 @@ select {
 
 @media screen and (max-width: 1200px), screen and (orientation: portrait){
     #weatherCard >  div > .card-body > h5{
-        font-size: 1.5em;
+        font-size: 1em;
     }
 
     #weatherCard {
-       flex-direction: column;
-       width: 35%;
-       font-size: 1.5em;
+       width: 100%;
+       font-size: 1em;
     }
 
     #weatherCard > div > .card-img {
-        width: 75%;
-        display: block;
-        margin: auto;
+        width: 100%;
     }
  }
  
@@ -60,8 +57,7 @@ select {
     }
 
     #weatherCard {
-       flex-direction: column;
-       width: 75%;
+       width: 100%;
        font-size: 1.5rem;
     }
 
