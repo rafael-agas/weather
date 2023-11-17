@@ -16,27 +16,28 @@
 </head>
 
 <body>
-
-    <h1>EuroWeather</h1>
-    <h2>Weather Forecast for Different European Cities</h2>
-    <div>
-        <label>Choose a city: </label>
-        <select id = "cities" name = "cities" title="Drop down and choose a city to see the forecast">
-            <option value="" selected>-- City, Country --</option>
-        </select>
+    <div class="my-5">
+        <div class="p-5 text-center bg-body-tertiary">
+            <h1 class="display-5 fw-bold text-body-emphasis">EuroWeather</h1>
+                <h2>Weather Forecast for Different European Cities</h2>
+                <div>
+                    <label>Choose a city: </label>
+                    <select id = "cities" name = "cities" title="Drop down and choose a city to see the forecast">
+                        <option value="" selected>-- City, Country --</option>
+                    </select>
+                </div>
+                <div class = "d-none" id = "tempContainer">
+                    <label class="switch m-2 p-2">
+                        <input type="checkbox" id="tempSwitch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class = "container">
+                    <div class = 'd-none' id = "loader"><img src = "/images/loading gif.gif" alt = "loading animation via GIPHY https://giphy.com/gifs/loop-loading-loader-xTk9ZvMnbIiIew7IpW made by Derek Fitzpatrick" height="200px"></div>
+            </div>
+        <div class = 'container'><div id = "weatherCard" class = "row"></div></div>
+        <footer>
+            <p class="copyright-text">© Copyright 2023 EuroWeather </p>
+        </footer>
     </div>
-    <div class = "d-none" id = "tempContainer">
-        <label class="switch m-2 p-2">
-            <input type="checkbox" id="tempSwitch">
-            <span class="slider"></span>
-        </label>
-    </div>
-    <div class = "container">
-        <div class = 'd-none' id = "loader"><img src = "/images/loading gif.gif" alt = "loading animation via GIPHY https://giphy.com/gifs/loop-loading-loader-xTk9ZvMnbIiIew7IpW made by Derek Fitzpatrick" height="200px"></div>
-    </div>
-    <div class = 'container'><div id = "weatherCard" class = "row"></div></div>
 </body>
-
-<footer>
-    <p class="copyright-text">© Copyright 2023 EuroWeather </p>
-</footer>
